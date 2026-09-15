@@ -27,7 +27,7 @@
         </a>
       </div>
 
-      <nav class="nav-center" aria-label="Main Navigation">
+      <nav class="nav-center" id="nav-center" aria-label="Main Navigation">
         <ul class="nav-links">
           <li><a href="#about" class="nav-link active">About Me</a></li>
           <li><a href="#portfolio" class="nav-link">Portfolio</a></li>
@@ -35,7 +35,13 @@
         </ul>
       </nav>
 
-      <div class="nav-right"></div>
+      <div class="nav-right">
+        <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle Navigation Menu" aria-expanded="false">
+          <span class="hamburger-bar"></span>
+          <span class="hamburger-bar"></span>
+          <span class="hamburger-bar"></span>
+        </button>
+      </div>
     </header>
 
     <!-- Main Hero Container -->
@@ -149,6 +155,23 @@
 
         <button type="submit" class="btn-submit">Confirm Booking Request ↗</button>
       </form>
+    </div>
+  </div>
+
+  <!-- Under Reconstruction Popup Modal -->
+  <div class="modal-overlay" id="modal-reconstruction">
+    <div class="modal-card construction-card">
+      <div class="construction-icon">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+          <line x1="12" y1="9" x2="12" y2="13"></line>
+          <line x1="12" y1="17" x2="12.01" y2="17"></line>
+        </svg>
+      </div>
+      <span class="modal-subtitle">Notice</span>
+      <h2 class="construction-title">Site is under reconstruction</h2>
+      <p class="construction-desc">Thank you for visiting! This portfolio website is currently undergoing updates and improvements.</p>
+      <button type="button" class="btn-submit btn-dismiss" id="btn-dismiss-reconstruction">Got it ↗</button>
     </div>
   </div>
 

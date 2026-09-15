@@ -68,48 +68,35 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   // ==========================================
-  // 3. "Book A Call" Modal Controller
+  // 3. "Under Reconstruction" Auto Modal Controller
   // ==========================================
-  const btnBookCall = document.getElementById('btn-book-call');
-  const modalBookCall = document.getElementById('modal-book-call');
-  const modalClose = document.getElementById('modal-close');
+  const modalReconstruction = document.getElementById('modal-reconstruction');
+  const btnDismissReconstruction = document.getElementById('btn-dismiss-reconstruction');
 
-  const openModal = () => {
-    modalBookCall.classList.remove('hidden');
-    document.body.style.overflow = 'hidden';
-  };
+  if (modalReconstruction) {
+    // Show automatically on site load
+    modalReconstruction.classList.remove('hidden');
 
-  window.closeModal = () => {
-    modalBookCall.classList.add('hidden');
-    document.body.style.overflow = '';
-  };
+    const closeReconstructionModal = () => {
+      modalReconstruction.classList.add('hidden');
+    };
 
-  if (btnBookCall) {
-    btnBookCall.addEventListener('click', (e) => {
-      e.preventDefault();
-      openModal();
+    if (btnDismissReconstruction) {
+      btnDismissReconstruction.addEventListener('click', closeReconstructionModal);
+    }
+
+    modalReconstruction.addEventListener('click', (e) => {
+      if (e.target === modalReconstruction) {
+        closeReconstructionModal();
+      }
     });
-  }
 
-  if (modalClose) {
-    modalClose.addEventListener('click', closeModal);
-  }
-
-  // Close modal on backdrop click
-  if (modalBookCall) {
-    modalBookCall.addEventListener('click', (e) => {
-      if (e.target === modalBookCall) {
-        closeModal();
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !modalReconstruction.classList.contains('hidden')) {
+        closeReconstructionModal();
       }
     });
   }
-
-  // Close modal on Escape key
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && !modalBookCall.classList.contains('hidden')) {
-      closeModal();
-    }
-  });
 
 
   // ==========================================
@@ -122,5 +109,43 @@ document.addEventListener('DOMContentLoaded', () => {
       link.classList.add('active');
     });
   });
+
+
+  // ==========================================
+  // 5. Mobile Hamburger Navigation Menu Toggle
+  // ==========================================
+  const mobileToggle = document.getElementById('mobile-toggle');
+  const navCenter = document.getElementById('nav-center');
+
+  if (mobileToggle && navCenter) {
+    const toggleMobileMenu = () => {
+      const isOpen = navCenter.classList.toggle('is-open');
+      mobileToggle.classList.toggle('is-active', isOpen);
+      mobileToggle.setAttribute('aria-expanded', isOpen);
+    };
+
+    const closeMobileMenu = () => {
+      navCenter.classList.remove('is-open');
+      mobileToggle.classList.remove('is-active');
+      mobileToggle.setAttribute('aria-expanded', 'false');
+    };
+
+    mobileToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      toggleMobileMenu();
+    });
+
+    // Close menu when clicking links
+    navLinks.forEach(link => {
+      link.addEventListener('click', closeMobileMenu);
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!navCenter.contains(e.target) && !mobileToggle.contains(e.target)) {
+        closeMobileMenu();
+      }
+    });
+  }
 
 });
